@@ -32,3 +32,13 @@ document.getElementById("checkout-subscription").addEventListener("click", async
   const { id } = await res.json();
   await stripe.redirectToCheckout({ sessionId: id });
 });
+const btnOneTime = document.getElementById("checkout-one-time");
+const btnSubscription = document.getElementById("checkout-subscription");
+
+btnOneTime.addEventListener("click", () => {
+  alert("Compra única funcionando!");
+});
+
+btnSubscription.addEventListener("click", () => {
+  alert("Assinatura funcionando!");
+});
