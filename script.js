@@ -6,7 +6,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
   });
 });
 // Substitua pela sua chave pública de teste do Stripe
-const stripe = Stripe("pk_test_XXXXXXXXXXXXXXXXXXXX");
+const stripe =price_1SQZuMDnXcpIZEtBrexTYyYC
 
 document.getElementById("checkout-one-time").addEventListener("click", async () => {
   const res = await fetch("/api/create-checkout-session", {
