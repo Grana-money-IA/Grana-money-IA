@@ -1,33 +1,57 @@
-0<!DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Grana Money IA</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    body { font-family: Arial, sans-serif; background:#f5f5f5; margin:0; padding:0; }
+    .container { max-width: 800px; margin: 50px auto; padding:20px; background:#fff; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.1); }
+    header { text-align:center; }
+    .product-card { text-align:center; padding:20px; margin-bottom:30px; }
+    .product-card img { max-width:300px; border-radius:10px; }
+    .product-card h2 { margin:20px 0 10px; }
+    .product-card p { color:#555; }
+    button { background:#4CAF50; color:white; border:none; padding:12px 25px; margin:10px; border-radius:5px; cursor:pointer; font-size:16px; }
+    button:hover { background:#45a049; }
+    #servicos { margin-top:30px; }
+    footer { text-align:center; padding:20px; color:#888; margin-top:50px; }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>Grana Money IA 💰🤖</h1>
-    <p>Automação, geração de conteúdo e soluções inteligentes para o seu negócio.</p>
-    
-<!-- BOTÕES DE COMPRA STRIPE -->
-<button id="checkout-one-time">Comprar Chat IA Premium</button>
-<button id="checkout-subscription">Assinar Chat IA Premium</button>
-  <section id="servicos">
-    <h2>Nossos Serviços</h2>
-    <ul>
-      <li>🤖 Chatbots inteligentes para empresas</li>
-      <li>🧠 Geração de textos e ideias com IA</li>
-      <li>💼 Automação de processos de vendas</li>
-    </ul>
-  </section>
+  <div class="container">
+    <header>
+      <h1>Grana Money IA 💰🤖</h1>
+      <p>Automação, geração de conteúdo e soluções inteligentes para o seu negócio.</p>
+    </header>
 
-  <footer>
-    <p>© 2025 Grana Money IA. Todos os direitos reservados.</p>
-  </footer>
+    <!-- Produto com imagem -->
+    <div class="product-card">
+      <img src= https://imgur.com/a/goSzQRU IA Premium">
+      <h2>Chat IA Premium</h2>
+      <p>Acesso ao chat avançado e geração de conteúdo automatizado.</p>
+      <button id="checkout-one-time">Comprar R$49,90 (Único)</button>
+      <button id="checkout-subscription">Assinar R$29,90/mês</button>
+    </div>
 
+    <!-- Serviços -->
+    <section id="servicos">
+      <h2>Nossos Serviços</h2>
+      <ul>
+        <li>🤖 Chatbots inteligentes para empresas</li>
+        <li>🧠 Geração de textos e ideias com IA</li>
+        <li>💼 Automação de processos de vendas</li>
+      </ul>
+    </section>
+
+    <footer>
+      <p>© 2025 Grana Money IA. Todos os direitos reservados.</p>
+    </footer>
+  </div>
+
+  <!-- Stripe + Script -->
+  <script src="https://js.stripe.com/v3/"></script>
   <script src="script.js"></script>
-</body><script src="https://js.stripe.com/v3/"></script>
-<script src="script.js"></script>
+</body>
 </html>
