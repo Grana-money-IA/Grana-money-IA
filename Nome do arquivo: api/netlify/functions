@@ -1,0 +1,33 @@
+// Rolagem suave para links internos
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    const alvo = document.querySelector(this.getAttribute('href'));
+    if (alvo) alvo.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+// Inicializa Stripe (coloque sua chave pública)
+const stripe = Stripe("pk_live_SUA_CHAVE_PUBLICA_DO_STRIPE");
+
+// Pagamento único
+document.getElementById("checkout-one-time").addEventListener("click", async () => {
+  const res = await fetch("/.netlify/functions/create-checkout-session", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ priceId: "price_XXXXXXXXXXXX" }) // ID do produto único
+  });
+  const { id } = await res.json();
+  await stripe.redirectToCheckout({ sessionId: id });
+});
+
+// Assinatura mensal
+document.getElementById("checkout-subscription").addEventListener("click", async () => {
+  const res = await fetch("/.netlify/functions/create-checkout-session", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ priceId: "price_YYYYYYYYYYYY" }) // ID da assinatura
+  });
+  const { id } = await res.json();
+  await stripe.redirectToCheckout({ sessionId: id });
+});
