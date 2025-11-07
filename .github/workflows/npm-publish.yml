@@ -1,0 +1,51 @@
+# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
+# For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
+
+name: Node.js Package
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npm test
+
+  publish-npm:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org/
+      - run: npm ci
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+            - nome: Configurar ambiente Go
+  utiliza: actions/setup-go@v6.0.0
+  com:
+    # A versão Go para baixar (se necessário) e usar. Suporta especificações e intervalos de versionamento semântico. Certifique-se de colocar esta opção entre aspas simples.
+    versão go: # opcional
+    # Caminho para o arquivo go.mod ou go.work.
+    go-version-file: # opcional
+    # Defina esta opção como verdadeira se desejar que a ação sempre verifique a versão mais recente disponível que atenda à especificação de versão.
+    verificar-mais-recente: # opcional
+    # Usado para obter distribuições Go do go-versions. Como existe um valor padrão, este normalmente não é fornecido pelo usuário. Ao executar esta ação no github.com, o valor padrão é suficiente. Ao executar no GHES, você pode fornecer um token de acesso pessoal para o github.com caso esteja enfrentando limitação de taxa.
+    token: # opcional, o padrão é ${{ github.server_url == 'https://github.com' && github.token || '' }}
+    # Usado para especificar se o armazenamento em cache é necessário. Defina como verdadeiro se desejar ativar o armazenamento em cache.
+    cache: # opcional, o padrão é verdadeiro
+    # Usado para especificar o caminho para um arquivo de dependência - go.sum
+    caminho-dependência-de-cache: # opcional
+    # Arquitetura de destino para o Go usar. Exemplos: x86, x64. A arquitetura do sistema será usada por padrão.
+    arquitetura: # opcional
+          
