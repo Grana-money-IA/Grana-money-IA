@@ -55,3 +55,41 @@
   <script src="script.js"></script>
 </body>
 </html>
+// Inicializa o Stripe com a chave pública
+const stripe = Stripe("")pk_live_51SQWCCDnXcpIZEtBhJrNTuVbgC2y0PaCeIcBKw45lFaAzuVoqL5EeoMzOaLPIyOaeiZEldzLAVvKH4XdXOR6uM7u00VhN8hypI // coloque sua chave pública aqui
+
+// Seleciona os botões
+const btnOneTime = document.getElementById("checkout-one-time");
+const btnSubscription = document.getElementById("checkout-subscription");
+
+// Botão pagamento único
+btnOneTime.addEventListener("click", async () => {
+  try {
+    const res = await fetch("/api/create-checkout-session", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ priceId: " }prod_TNKZ76el7fsMPu // seu priceId
+    });
+    const session = await res.json();
+    await stripe.redirectToCheckout({ sessionId: session.id });
+  } catch (err) {
+    console.error("Erro ao criar sessão de checkout:", err);
+    alert("Erro ao tentar iniciar o pagamento.");
+  }
+});
+
+// Botão assinatura
+btnSubscription.addEventListener("click", async () => {
+  try {
+    const res = await fetch("/api/create-checkout-session", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ priceId:  }price_1SQZuMDnXcpIZEtBrexTYyYC // seu priceId de assinatura
+    });
+    const session = await res.json();
+    await stripe.redirectToCheckout({ sessionId: session.id });
+  } catch (err) {
+    console.error("Erro ao criar sessão de checkout:", err);
+    alert("Erro ao tentar iniciar a assinatura.");
+  }
+});
