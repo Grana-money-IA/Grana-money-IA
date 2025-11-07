@@ -1,4 +1,5 @@
-// Rolagem suave (opcional, se tiver links internos)
+
+// Rolagem suave para links internos
 document.querySelectorAll('a[href^="#"]').forEach(link => {
   link.addEventListener('click', function(e) {
     e.preventDefault();
@@ -17,8 +18,8 @@ document.getElementById("checkout-button").addEventListener("click", async () =>
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        priceId:// Price ID do seu produto
-      })prod_TNKZ76el7fsMPu
+        priceId: "price_1SQZuMDnXcpIZEtBrexTYyYC" // Price ID do seu produto
+      })
     });
 
     const { id } = await res.json();
