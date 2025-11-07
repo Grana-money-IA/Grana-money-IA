@@ -1,16 +1,30 @@
-// Stripe public key (você vai criar na sua conta Stripe)
-const stripe = Stripe("SUA_CHAVE_PUBLICA_DO_STRIPE");
+// Rolagem suave (opcional, se tiver links internos)
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    const alvo = document.querySelector(this.getAttribute('href'));
+    if (alvo) alvo.scrollIntoView({ behavior: 'smooth' });
+  });
+});
 
-const checkoutButton = document.getElementById("checkout-button");
+// Stripe - sua chave pública
+const stripe = Stripe("pk_live_51SQWCCDnXcpIZEtBhJrNTuVbgC2y0PaCeIcBKw45lFaAzuVoqL5EeoMzOaLPIyOaeiZEldzLAVvKH4XdXOR6uM7u00VhN8hypI");
 
-checkoutButton.addEventListener("click", () => {
-  fetch("/create-checkout-session", { method: "POST" })
-    .then(res => res.json())
-    .then(session => {
-      return stripe.redirectToCheckout({ sessionId: session.id });
-    })
-    .then(result => {
-      if (result.error) alert(result.error.message);
-    })
-    .catch(err => console.error(err));
+// Botão de pagamento único
+document.getElementById("checkout-button").addEventListener("click", async () => {
+  try {
+    const res = await fetch("/api/create-checkout-session", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        priceId:// Price ID do seu produto
+      })prod_TNKZ76el7fsMPu
+    });
+
+    const { id } = await res.json();
+    await stripe.redirectToCheckout({ sessionId: id });
+  } catch (err) {
+    console.error(err);
+    alert("Erro ao iniciar o pagamento. Veja o console para detalhes.");
+  }
 });
