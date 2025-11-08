@@ -17,12 +17,8 @@ premium.html
 istyle.css
 script.js
 escript.js
-README.md
+
 
 ## Instalação
-1. Clone o repositório
-2. Configure variáveis de ambiente (STRIPE_SECRET_KEY, STRIPE_PUBLIC_KEY, PRICE_ID_UNICO, PRICE_ID_ASSINATURA)
-3. Faça deploy (Vercel recomendado)
-
-## Licença
-MIT
+Chave publicavel 
+pk_test_51SQWCUD2yUVCR4xU80UabulobqK1Qt0APEsGymb1J8nEa3ErAcem0qG3z65XnNHaF5BQrzDfuaS0egGfsDv4DDv000w3IWYidd, price_1SQZuMDnXcpIZEtBrexTYyYC
