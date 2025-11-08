@@ -11,11 +11,27 @@ export default async function handler(req, res) {
     const { priceId } = req.body;
 
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"],
-      line_items: [{ price: priceId, quantity: 1 }],
+      // ✅ Deixe o Stripe decidir automaticamente os métodos disponíveis
+      // (card, pix, boleto, link — conforme ativados no painel)
+      // Se quiser forçar manualmente, use: ['card', 'pix', 'boleto', 'link']
+      // Mas o modo automático é mais seguro e atualizado:
+      // payment_method_types: ['card', 'pix', 'boleto', 'link'],
+
+      line_items: [
+        {
+          price: priceId,
+          quantity: 1,
+        },
+      ],
       mode: "payment",
+
+      // ✅ URLs de retorno
       success_url: `${req.headers.origin}/premium.html?success=true`,
       cancel_url: `${req.headers.origin}/premium.html?canceled=true`,
+
+      // ✅ Importante: define país e moeda para habilitar Pix/Boleto
+      currency: "brl",
+      locale: "pt-BR",
     });
 
     return res.status(200).json({ id: session.id });
