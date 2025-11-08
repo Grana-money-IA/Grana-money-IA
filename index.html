@@ -58,9 +58,8 @@
     // Seleciona os botões
     const btnOneTime = document.getElementById("checkout-one-time");
     const btnSubscription = document.getElementById("checkout-subscription");
-
-    // Pagamento único
-    btnOneTime.addEventListener("click", async () => {
+https://buy.stripe.com/8x27sLaHK3rq0Ml2390co00
+    // Pagamento => {
       try {
         const res = await fetch("/api/create-checkout-session", {
           method: "POST",
