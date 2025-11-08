@@ -1,244 +1,30 @@
+
 <!DOCTYPE html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>💰 Grana Money IA</title>
-    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background: linear-gradient(to bottom right, #0f172a, #1e293b);
-        color: #f8fafc;
-        text-align: center;
-        margin: 0;
-        padding: 0;
-      }
-
-      header {
-        padding: 30px 0;
-        background-color: rgba(15, 23, 42, 0.8);
-      }
-
-      h1 {
-        font-size: 2.5rem;
-        margin-bottom: 10px;
-      }
-
-      p {
-        font-size: 1.1rem;
-        color: #cbd5e1;
-      }
-
-      section {
-        margin: 60px auto;
-        max-width: 600px;
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 12px;
-        padding: 40px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-      }
-
-      button {
-        background-color: #635bff;
-        color: white;
-        padding: 14px 32px;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 1.2rem;
-        transition: 0.3s;
-      }
-
-      button:hover {
-        background-color: #4f46e5;
-      }
-
-      footer {
-        margin-top: 60px;
-        padding: 20px;
-        font-size: 0.9rem;
-        color: #94a3b8;
-      }
-    </style>
-  </head>
-
-  <body>
-    <header>
-      <h1>💰 Grana Money IA</h1>
-      <p>Sua plataforma de inteligência artificial e automação</p>
-    </header>
-
-    <section>
-      <h2>Plano Premium</h2>
-      <p>Acesso completo ao Chat IA Premium e geração de conteúdo automatizado.</p>
-
-      <!-- Botão de pagamento -->
-      <button id="checkout-button">💳 Comprar Agora – R$49,90</button>
-
-      <!-- Stripe SDK -->
-      <script src="https://js.stripe.com/v3/"></script>
-      <script>
-        const checkoutButton = document.getElementById("checkout-button");
-        const stripe = Stripe("pk_test_51SQWCUD2yUVCR4xU80UabulobqK1Qt0APEsGymb1J8nEa3ErAcem0qG3z65XnNHaF5BQrzDfuaS0egGfsDv4DDv000w3IWYidd");
-
-        checkoutButton.addEventListener("click", async () => {
-          try {
-            const response = await fetch("/api/create-checkout-session", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                priceId: "price_1SQZuMDnXcpIZEtBrexTYyYC",
-              }),
-            });
-
-            if (!response.ok) {
-              throw new Error("Erro ao conectar ao servidor");
-            }
-
-            const session = await response.json();
-
-            if (session?.id) {
-              await stripe.redirectToCheckout({ sessionId: session.id });
-            } else {
-              alert("Erro ao iniciar o pagamento. Tente novamente.");
-            }
-          } catch (error) {
-            console.error("❌ Falha na comunicação com o servidor:", error);
-            alert("Falha na comunicação com o servidor. Tente novamente.");
-          }
-        });
-      </script>
-    </section>
-
-    <footer>
-      <p>© 2025 Grana Money IA — Todos os direitos reservados.</p>
-    </footer>
-  </body>
-</html <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>💎 Serviços Premium - Grana Money IA</title>
+  <title>💰 Grana Money IA</title>
   <link rel="stylesheet" href="style.css">
-
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to bottom right, #0f172a, #1e293b);
-      color: #f8fafc;
-      margin: 0;
-      text-align: center;
-    }
-
-    header {
-      background-color: rgba(15, 23, 42, 0.8);
-      padding: 30px;
-    }
-
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 8px;
-    }
-
-    h2 {
-      font-size: 1.5rem;
-      margin-top: 30px;
-    }
-
-    ul {
-      list-style: none;
-      padding: 0;
-      font-size: 1.1rem;
-      color: #cbd5e1;
-      margin-bottom: 30px;
-    }
-
-    li {
-      margin: 8px 0;
-    }
-
-    .btn, button {
-      background-color: #635bff;
-      color: #fff;
-      padding: 12px 28px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: background 0.3s;
-      text-decoration: none;
-      display: inline-block;
-    }
-
-    .btn:hover, button:hover {
-      background-color: #4f46e5;
-    }
-
-    footer {
-      margin-top: 60px;
-      padding: 20px;
-      font-size: 0.9rem;
-      color: #94a3b8;
-    }
-  </style>
+  <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
   <header>
-    <h1>💎 Grana Money IA Premium</h1>
-    <p>Acesso a serviços exclusivos e conteúdos avançados com IA</p>
-    <a href="index.html" class="btn">⬅️ Voltar para página principal</a>
+    <h1>💰 Grana Money IA</h1>
+    <p>Sua plataforma de inteligência artificial e automação</p>
   </header>
 
-  <main>
-    <section id="premium-services">
-      <h2>Planos e Serviços</h2>
-      <ul>
-        <li>🤖 Chatbot Avançado com IA</li>
-        <li>🧠 Geração de textos e artigos exclusivos</li>
-        <li>📊 Automação avançada de vendas</li>
-      </ul>
-      <button id="checkout-button">💳 Assinar Premium</button>
-    </section>
-  </main>
+  <section>
+    <h2>Plano Premium</h2>
+    <p>Acesso completo ao Chat IA Premium e geração de conteúdo automatizado.</p>
+    <button id="checkout-one-time" class="btn">💳 Comprar Agora – R$49,90</button>
+    <button id="checkout-subscription" class="btn">📅 Assinar Mensal – R$29,90</button>
+  </section>
 
   <footer>
     <p>© 2025 Grana Money IA — Todos os direitos reservados.</p>
   </footer>
 
-  <!-- Stripe SDK -->
-  <script src="https://js.stripe.com/v3/"></script>
-  <script>
-    const stripe = Stripe("pk_test_51SQWCUD2yUVCR4xU80UabulobqK1Qt0APEsGymb1J8nEa3ErAcem0qG3z65XnNHaF5BQrzDfuaS0egGfsDv4DDv000w3IWYidd");
-    const checkoutButton = document.getElementById("checkout-button");
-
-    checkoutButton.addEventListener("click", async () => {
-      try {
-        const response = await fetch("/api/create-checkout-session", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            priceId: "price_1SQZuMDnXcpIZEtBrexTYyYC",
-          }),
-        });
-
-        if (!response.ok) {
-          throw new Error("Erro ao conectar com o servidor");
-        }
-
-        const session = await response.json();
-
-        if (session?.id) {
-          await stripe.redirectToCheckout({ sessionId: session.id });
-        } else {
-          alert("Erro ao iniciar o pagamento. Tente novamente.");
-        }
-      } catch (error) {
-        console.error("❌ Erro de conexão:", error);
-        alert("Falha na comunicação com o servidor. Tente novamente.");
-      }
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
