@@ -13,12 +13,11 @@ const stripe = Stripe("pk_test_51SQWCUD2yUVCR4xU80UabulobqK1Qt0APEsGymb1J8nEa3Er
 // Botão de pagamento único
 document.getElementById("checkout-one-time").addEventListener("click", async () => {
   try {
-    const res = await fetch("/api/create-checkout-session", {
+    const res = await fetch("/api/create-checkout-session.js", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ priceId: "price_1SQZuMDnXcpIZEtBrexTYyYC" })
     });
-
     const session = await res.json();
     await stripe.redirectToCheckout({ sessionId: session.id });
   } catch (err) {
@@ -30,12 +29,11 @@ document.getElementById("checkout-one-time").addEventListener("click", async () 
 // Botão de assinatura mensal
 document.getElementById("checkout-subscription").addEventListener("click", async () => {
   try {
-    const res = await fetch("/api/create-checkout-session", {
+    const res = await fetch("/api/create-checkout-session.js", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ priceId: "price_1SQZvhDnXcpIZEtBqcIQq7XE" })
     });
-
     const session = await res.json();
     await stripe.redirectToCheckout({ sessionId: session.id });
   } catch (err) {
