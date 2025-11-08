@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Grana Money IA</title>
+    <title>💰 Grana Money IA</title>
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
     <style>
       body {
@@ -74,24 +73,44 @@
       <h2>Plano Premium</h2>
       <p>Acesso completo ao Chat IA Premium e geração de conteúdo automatizado.</p>
 
-      <!-- Botão de pagamento com o link do Stripe -->
-      <a
-        href="https://buy.stripe.com/8x27sLaHK3rq0Ml2390co00"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <button>💳 Comprar Agora – R$49,90</button>
-      </a>
+      <!-- Botão de pagamento integrado com Stripe -->
+      <button id="checkout-button">💳 Comprar Agora – R$49,90</button>
+
+      <script src="https://js.stripe.com/v3/"></script>
+      <script>
+        const stripe = Stripe(
+          "pk_test_51SQWCUD2yUVCR4xU80UabulobqK1Qt0APEsGymb1J8nEa3ErAcem0qG3z65XnNHaF5BQrzDfuaS0egGfsDv4DDv000w3IWYidd"
+        );
+
+        document
+          .getElementById("checkout-button")
+          .addEventListener("click", async () => {
+            try {
+              const response = await fetch("/api/create-checkout-session", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  priceId: "price_1SQZuMDnXcpIZEtBrexTYyYC",
+                }),
+              });
+
+              const session = await response.json();
+
+              if (session.id) {
+                stripe.redirectToCheckout({ sessionId: session.id });
+              } else {
+                alert("Erro ao iniciar o pagamento. Tente novamente.");
+              }
+            } catch (error) {
+              console.error("Erro ao redirecionar para o checkout:", error);
+              alert("Falha na comunicação com o servidor.");
+            }
+          });
+      </script>
     </section>
 
     <footer>
       <p>© 2025 Grana Money IA — Todos os direitos reservados.</p>
     </footer>
   </body>
-</html><a
-  href="https://buy.stripe.com/8x27sLaHK3rq0Ml2390co00"
-  target="_blank"
-  rel="noopener noreferrer"
->
-  <button>💳 Comprar Agora – R$49,90</button>
-</a>
+</html>
