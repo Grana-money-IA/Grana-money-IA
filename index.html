@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -26,16 +25,14 @@
       <p>Automação, geração de conteúdo e soluções inteligentes para o seu negócio.</p>
     </header>
 
-    <!-- Produto com imagem -->
     <div class="product-card">
-      <img src= https://imgur.com/a/goSzQRU IA Premium">
+      <img src="https://imgur.com/a/goSzQRU" alt="IA Premium">
       <h2>Chat IA Premium</h2>
       <p>Acesso ao chat avançado e geração de conteúdo automatizado.</p>
       <button id="checkout-one-time">Comprar R$49,90 (Único)</button>
       <button id="checkout-subscription">Assinar R$29,90/mês</button>
     </div>
 
-    <!-- Serviços -->
     <section id="servicos">
       <h2>Nossos Serviços</h2>
       <ul>
@@ -50,46 +47,47 @@
     </footer>
   </div>
 
-  <!-- Stripe + Script -->
+  <!-- Stripe JS -->
   <script src="https://js.stripe.com/v3/"></script>
-  <script src="script.js"></script>
+  <script>
+    // Inicializa o Stripe com sua chave pública
+    const stripe = Stripe("pk_test_51SQWCUD2yUVCR4xU80UabulobqK1Qt0APEsGymb1J8nEa3ErAcem0qG3z65XnNHaF5BQrzDfuaS0egGfsDv4DDv000w3IWYidd");
+
+    // Seleciona os botões
+    const btnOneTime = document.getElementById("checkout-one-time");
+    const btnSubscription = document.getElementById("checkout-subscription");
+
+    // Pagamento único
+    btnOneTime.addEventListener("click", async () => {
+      try {
+        const res = await fetch("/api/create-checkout-session", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ priceId: "prod_TNKZ76el7fsMPu" })
+        });
+        const session = await res.json();
+        await stripe.redirectToCheckout({ sessionId: session.id });
+      } catch (err) {
+        console.error("Erro ao criar sessão de checkout:", err);
+        alert("Erro ao tentar iniciar o pagamento.");
+      }
+    });
+
+    // Assinatura
+    btnSubscription.addEventListener("click", async () => {
+      try {
+        const res = await fetch("/api/create-checkout-session", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ priceId: "price_1SQZuMDnXcpIZEtBrexTYyYC" })
+        });
+        const session = await res.json();
+        await stripe.redirectToCheckout({ sessionId: session.id });
+      } catch (err) {
+        console.error("Erro ao criar sessão de checkout:", err);
+        alert("Erro ao tentar iniciar a assinatura.");
+      }
+    });
+  </script>
 </body>
 </html>
-// Inicializa o Stripe com a chave pública
-const stripe = Stripe("")pk_live_51SQWCCDnXcpIZEtBhJrNTuVbgC2y0PaCeIcBKw45lFaAzuVoqL5EeoMzOaLPIyOaeiZEldzLAVvKH4XdXOR6uM7u00VhN8hypI // coloque sua chave pública aqui
-
-// Seleciona os botões
-const btnOneTime = document.getElementById("checkout-one-time");
-const btnSubscription = document.getElementById("checkout-subscription");
-
-// Botão pagamento único
-btnOneTime.addEventListener("click", async () => {
-  try {
-    const res = await fetch("/api/create-checkout-session", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ priceId: " }prod_TNKZ76el7fsMPu // seu priceId
-    });
-    const session = await res.json();
-    await stripe.redirectToCheckout({ sessionId: session.id });
-  } catch (err) {
-    console.error("Erro ao criar sessão de checkout:", err);
-    alert("Erro ao tentar iniciar o pagamento.");
-  }
-});
-
-// Botão assinatura
-btnSubscription.addEventListener("click", async () => {
-  try {
-    const res = await fetch("/api/create-checkout-session", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ priceId:  }price_1SQZuMDnXcpIZEtBrexTYyYC // seu priceId de assinatura
-    });
-    const session = await res.json();
-    await stripe.redirectToCheckout({ sessionId: session.id });
-  } catch (err) {
-    console.error("Erro ao criar sessão de checkout:", err);
-    alert("Erro ao tentar iniciar a assinatura.");
-  }
-});
