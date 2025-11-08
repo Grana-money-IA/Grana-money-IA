@@ -73,39 +73,41 @@
       <h2>Plano Premium</h2>
       <p>Acesso completo ao Chat IA Premium e geração de conteúdo automatizado.</p>
 
-      <!-- Botão de pagamento integrado com Stripe -->
+      <!-- Botão de pagamento -->
       <button id="checkout-button">💳 Comprar Agora – R$49,90</button>
 
+      <!-- Stripe SDK -->
       <script src="https://js.stripe.com/v3/"></script>
       <script>
-        const stripe = Stripe(
-          "pk_test_51SQWCUD2yUVCR4xU80UabulobqK1Qt0APEsGymb1J8nEa3ErAcem0qG3z65XnNHaF5BQrzDfuaS0egGfsDv4DDv000w3IWYidd"
-        );
+        const checkoutButton = document.getElementById("checkout-button");
+        const stripe = Stripe("pk_test_51SQWCUD2yUVCR4xU80UabulobqK1Qt0APEsGymb1J8nEa3ErAcem0qG3z65XnNHaF5BQrzDfuaS0egGfsDv4DDv000w3IWYidd");
 
-        document
-          .getElementById("checkout-button")
-          .addEventListener("click", async () => {
-            try {
-              const response = await fetch("/api/create-checkout-session", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                  priceId: "price_1SQZuMDnXcpIZEtBrexTYyYC",
-                }),
-              });
+        checkoutButton.addEventListener("click", async () => {
+          try {
+            const response = await fetch("/api/create-checkout-session", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                priceId: "price_1SQZuMDnXcpIZEtBrexTYyYC",
+              }),
+            });
 
-              const session = await response.json();
-
-              if (session.id) {
-                stripe.redirectToCheckout({ sessionId: session.id });
-              } else {
-                alert("Erro ao iniciar o pagamento. Tente novamente.");
-              }
-            } catch (error) {
-              console.error("Erro ao redirecionar para o checkout:", error);
-              alert("Falha na comunicação com o servidor.");
+            if (!response.ok) {
+              throw new Error("Erro ao conectar ao servidor");
             }
-          });
+
+            const session = await response.json();
+
+            if (session?.id) {
+              await stripe.redirectToCheckout({ sessionId: session.id });
+            } else {
+              alert("Erro ao iniciar o pagamento. Tente novamente.");
+            }
+          } catch (error) {
+            console.error("❌ Falha na comunicação com o servidor:", error);
+            alert("Falha na comunicação com o servidor. Tente novamente.");
+          }
+        });
       </script>
     </section>
 
