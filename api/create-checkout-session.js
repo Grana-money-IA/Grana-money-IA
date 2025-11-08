@@ -1,4 +1,4 @@
-import Stripe from "stripe";
+rimport Stripe from "stripe";
 
 // Chave secreta do Stripe (backend)
 const stripe = new Stripe("sk_test_51SQWCUD2yUVCR4xU80UabulobqK1Qt0APEsGymb1J8nEa3ErAcem0qG3z65XnNHaF5BQrzDfuaS0egGfsDv4DDv000w3IWYidd", {
