@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IA Premium</title>
+<link rel="stylesheet" href="istyle.css">
+<script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+<header>
+<h1>IA Premium</h1>
+<p>Chat Inteligente e geração de conteúdo avançada.</p>
+</header>
+
+<div class="planos">
+<h2>Escolha seu plano:</h2>
+<button id="checkout-one-time">Comprar R$49,90 (Único)</button>
+<button id="checkout-subscription">Assinar R$29,90/mês</button>
+</div>
+
+<section id="chat">
+<h2>Chat IA</h2>
+<textarea id="mensagem" placeholder="Digite sua mensagem"></textarea>
+<button id="enviar">Enviar</button>
+<div id="respostas"></div>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
