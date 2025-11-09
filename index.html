@@ -57,31 +57,55 @@
     <script>
       const stripe = Stripe("pk_test_51SQWCUD2yUVCR4xU80UabulobqK1Qt0APEsGymb1J8nEa3ErAcem0qG3z65XnNHaF5BQrzDfuaS0egGfsDv4DDv000w3IWYidd");
 
-      // API - pagamento único
-      document.getElementById("checkout-one-time").addEventListener("click", async () => {
-        const response = await fetch("/api/create-checkout-session", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ priceId: "price_1SQZuMDnXcpIZEtBrexTYyYC" }),
-        });
+      
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>💰 Grana Money IA</title>
+    <link rel="stylesheet" href="istyle.css" />
+  </head>
 
-        const session = await response.json();
-        if (session.url) window.location.href = session.url;
-        else alert("Erro ao criar sessão de pagamento.");
-      });
+  <body>
+    <header class="hero">
+      <div class="hero-content">
+        <h1>💰 Grana Money IA</h1>
+        <p>Automação e inteligência artificial ao seu alcance.</p>
+        <a href="#planos" class="btn-primary">Conhecer Planos</a>
+      </div>
+    </header>
 
-      // API - assinatura mensal
-      document.getElementById("checkout-subscription").addEventListener("click", async () => {
-        const response = await fetch("/api/create-checkout-session", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ priceId: "price_1SQZuMDnXcpIZEtBrexTYyYC" }),
-        });
+    <main>
+      <section id="planos" class="planos">
+        <h2>🚀 Plano Premium</h2>
+        <p>Acesso completo ao Chat IA Premium e automações exclusivas.</p>
 
-        const session = await response.json();
-        if (session.url) window.location.href = session.url;
-        else alert("Erro ao criar sessão de assinatura.");
-      });
-    </script>
+        <div class="card">
+          <img
+            src="https://files.stripe.com/links/MY_IMAGEM_AQUI.png"
+            alt="Chat IA Premium"
+          />
+          <h3>Chat IA Premium</h3>
+          <p class="descricao">
+            Acesse a IA avançada da Grana Money para automações inteligentes e gestão eficiente.
+          </p>
+
+          <div class="precos">
+            <a
+              href="https://buy.stripe.com/8x27sLaHK3rq0Ml2390co00"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <button class="btn">💳 Comprar Agora — R$49,90</button>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>© 2025 Grana Money IA. Todos os direitos reservados.</p>
+    </footer>
   </body>
 </html>
