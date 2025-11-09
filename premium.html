@@ -3,11 +3,61 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Grana Money Premium</title>
-    <link rel="stylesheet" href="istyle.css" />
+    <title>Chat IA Premium</title>
+    <style>
+      body {
+        background: #0f172a;
+        color: white;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        text-align: center;
+      }
+      textarea {
+        width: 80%;
+        height: 100px;
+        border-radius: 8px;
+        border: none;
+        padding: 10px;
+        font-size: 1rem;
+      }
+      button {
+        background-color: #635bff;
+        color: white;
+        padding: 10px 20px;
+        margin-top: 10px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+      .response {
+        margin-top: 30px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        padding: 20px;
+      }
+    </style>
   </head>
   <body>
-    <h1>🎉 Bem-vindo ao Premium!</h1>
-    <p>Seu pagamento foi processado com sucesso.</p>
+    <h1>🤖 Chat IA Premium</h1>
+    <p>Digite sua pergunta sobre gestão, negócios ou automação:</p>
+    <textarea id="userInput"></textarea><br />
+    <button onclick="sendMessage()">Enviar</button>
+    <div class="response" id="responseBox"></div>
+
+    <script>
+      async function sendMessage() {
+        const input = document.getElementById("userInput").value;
+        const box = document.getElementById("responseBox");
+        box.innerHTML = "⏳ Processando...";
+        const res = await fetch("/api/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: input }),
+        });
+        const data = await res.json();
+        box.innerHTML = "💬 " + data.reply;
+      }
+    </script>
   </body>
 </html>
