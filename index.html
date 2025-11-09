@@ -31,9 +31,20 @@
           <p class="descricao">
             Assine e tenha acesso ilimitado à IA avançada para negócios e gestão.
           </p>
+
           <div class="precos">
-            <button id="checkout-one-time" class="btn">💳 Comprar R$49,90 (único)</button>
-            <button id="checkout-subscription" class="btn">🔁 Assinar R$29,90/mês</button>
+            <!-- 🔗 BOTÃO DIRETO COM LINK DO STRIPE -->
+            <a
+              href="https://buy.stripe.com/8x27sLaHK3rq0Ml2390co00"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <button class="btn">💳 Comprar direto — R$49,90</button>
+            </a>
+
+            <!-- 🔁 BOTÕES QUE USAM A API (opcional) -->
+            <button id="checkout-one-time" class="btn">💳 Comprar via API</button>
+            <button id="checkout-subscription" class="btn">🔁 Assinar via API</button>
           </div>
         </div>
       </section>
@@ -46,6 +57,7 @@
     <script>
       const stripe = Stripe("pk_test_51SQWCUD2yUVCR4xU80UabulobqK1Qt0APEsGymb1J8nEa3ErAcem0qG3z65XnNHaF5BQrzDfuaS0egGfsDv4DDv000w3IWYidd");
 
+      // API - pagamento único
       document.getElementById("checkout-one-time").addEventListener("click", async () => {
         const response = await fetch("/api/create-checkout-session", {
           method: "POST",
@@ -58,6 +70,7 @@
         else alert("Erro ao criar sessão de pagamento.");
       });
 
+      // API - assinatura mensal
       document.getElementById("checkout-subscription").addEventListener("click", async () => {
         const response = await fetch("/api/create-checkout-session", {
           method: "POST",
