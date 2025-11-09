@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const stripe = require('stripe')(proces);Chave secreta sk_test_51SQWCUD2yUVCR4xU4gcnopG0PEXzpfHEFG8kjmFRvJs7SLfdCxERtcJI9PNzVWQliCUe8KT4UcDsS1EFbmAeu2ZK00Evdr4G3B
 
 app.use(express.json());
 app.use(express.static(__dirname));
@@ -10,7 +10,7 @@ app.post('/create-checkout-session', async (req, res) => {
   try {
     const session = await stripe.checkout.sessions.create({
       line_items: [
-        { price: '{{PRICE_ID}}', quantity: 1 }
+        { price: '{{}',price_1SQZuMDnXcpIZEtBrexTYyYC quantity: 1 }
       ],
       mode: 'payment',
       payment_method_types: ['card', 'link', 'pix', 'paypal'],
