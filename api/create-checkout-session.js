@@ -1,7 +1,3 @@
-
-import Stripe from 'stripe';
-const stripe = new Stripe('sk_test_51SQWCUD2yUVCR4xU4gcnopG0PEXzpfHEFG8kjmFRvJs7SLfdCxERtcJI9PNzVWQliCUe8KT4UcDsS1EFbmAeu2ZK00Evdr4G3B');
-
 import Stripe from "stripe";
 
 // Sua chave secreta do Stripe (backend)
