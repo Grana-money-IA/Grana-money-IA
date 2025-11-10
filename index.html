@@ -110,87 +110,10 @@
         <li>Acesso ilimitado à IA avançada</li>
         <li>Automação de tarefas inteligentes</li>
         <li>Suporte exclusivo e atualizações contínuas</li>
-        <li>Pagamentos via Pix, Link e Cartão</li>
-      </ul>
-    </section>
-  </main>
-
-  <footer>
-    © 2025 Grana Money IA. Todos os direitos reservados.
-  </footer>
-
-</body>
-</html>
-        color: #94a3b8;
-      }
-    </style>
-    <!-- QRCode Library -->
-    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
-    <!-- Stripe JS -->
-    <script src="https://js.stripe.com/v3/"></script>
-  </head>
-  <body>
-    <header>
-      <h1>IA Premium</h1>
-      <p class="subtitle">Assinatura mensal ou compra única com Pix/Link</p>
-    </header>
-
-    <section>
-      <button id="buy-button">Gerar Pagamento</button>
-      <div id="pix-container"></div>
-      <a id="link-button" href="#" target="_blank">Pagar via Link</a>
-      <div id="error-message" style="color: #f87171; margin-top: 15px;"></div>
-    </section>
-
-    <footer>
-      © 2025 Grana Money IA. Todos os direitos reservados.
-    </footer>
-
+        
     <script>
       // Sua chave publicável do Stripe
       const stripe = Stripe('pk_test_51SQWCUD2yUVCR4xU80UabulobqK1Qt0APEsGymb1J8nEa3ErAcem0qG3z65XnNHaF5BQrzDfuaS0egGfsDv4DDv000w3IWYidd');
 
       document.getElementById('buy-button').addEventListener('click', async () => {
-        try {
-      <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>IA Premium</title>
-  <link rel="stylesheet" href="istyle.css">
-  <script src="https://js.stripe.com/v3/"></script>
-</head>
-<body>
-  <header>
-    <h1>IA Premium</h1>
-    <p>Acesso completo à Inteligência Artificial Avançada</p>
-  </header>
-
-  <main>
-    <button id="checkout-onetime">Compra Única</button>
-    <button id="checkout-subscription">Assinatura Mensal</button>
-  </main>
-
-  <script>
-    const checkoutButton = (type) => {
-      fetch("/api/checkout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ type })
-      })
-      .then(res => res.json())
-      .then(data => {
-        if (data.payment_url) {
-          window.location.href = data.payment_url;
-        } else {
-          alert("Erro ao iniciar pagamento");
-        }
-      });
-    };
-
-    document.getElementById("checkout-onetime").addEventListener("click", () => checkoutButton("payment"));
-    document.getElementById("checkout-subscription").addEventListener("click", () => checkoutButton("subscription"));
-  </script>
-</body>
-</html>
+      
