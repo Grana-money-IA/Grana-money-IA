@@ -1,65 +1,42 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chat IA Premium</title>
-    <style>
-      body {
-        background: #0f172a;
-        color: white;
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 20px;
-        text-align: center;
-      }
-      textarea {
-        width: 80%;
-        height: 100px;
-        border-radius: 8px;
-        border: none;
-        padding: 10px;
-        font-size: 1rem;
-      }
-      button {
-        background-color: #635bff;
-        color: white;
-        padding: 10px 20px;
-        margin-top: 10px;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-      }
-      .response {
-        margin-top: 30px;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 10px;
-        padding: 20px;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>🤖 Chat IA Premium</h1>
-    <p>Digite sua pergunta sobre gestão, negócios ou automação:</p>
-    <textarea id="userInput"></textarea><br />
-    <button onclick="sendMessage()">Enviar</button>
-    <div class="response" id="responseBox"></div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IA Premium</title>
+  <link rel="stylesheet" href="istyle.css">
+  <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+  <header>
+    <h1>IA Premium</h1>
+    <p>Acesso completo à Inteligência Artificial Avançada</p>
+  </header>
 
-    <script>
-      async function sendMessage() {
-        const input = document.getElementById("userInput").value;
-        const box = document.getElementById("responseBox");
-        box.innerHTML = "⏳ Processando...";
-        const res = await fetch("/api/chat", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message: input }),
-        });
-        const data = await res.json();
-        box.innerHTML = "💬 " + data.reply;
-      }
-    </script>
-  </body>
-</html><button id="buy-button">Comprar Agora</button>
-<div id="express-checkout-element"></div>
-<div id="error-message" style="color:red"></div>
+  <main>
+    <button id="checkout-onetime">Compra Única</button>
+    <button id="checkout-subscription">Assinatura Mensal</button>
+  </main>
+
+  <script>
+    const checkoutButton = (type) => {
+      fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.payment_url) {
+          window.location.href = data.payment_url;
+        } else {
+          alert("Erro ao iniciar pagamento");
+        }
+      });
+    };
+
+    document.getElementById("checkout-onetime").addEventListener("click", () => checkoutButton("payment"));
+    document.getElementById("checkout-subscription").addEventListener("click", () => checkoutButton("subscription"));
+  </script>
+</body>
+</html>
