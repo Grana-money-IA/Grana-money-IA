@@ -1,12 +1,11 @@
 
-<!DOCTYPE <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Grana Money IA</title>
   <style>
-    /* Reset e estilo base */
     body {
       font-family: Arial, sans-serif;
       margin: 0;
@@ -39,11 +38,6 @@
       background: rgba(255, 255, 255, 0.05);
       border-radius: 12px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      transition: transform 0.3s;
-    }
-
-    main:hover {
-      transform: translateY(-5px);
     }
 
     button {
@@ -62,34 +56,14 @@
       transform: scale(1.05);
     }
 
-    section.features {
-      margin-top: 40px;
-      text-align: left;
-      color: #cbd5e1;
-    }
-
-    section.features h2 {
-      margin-bottom: 10px;
-      font-size: 1.6rem;
-      color: #fff;
-    }
-
-    section.features ul {
-      list-style-type: disc;
-      padding-left: 20px;
-    }
-
     footer {
       margin-top: 80px;
       padding: 20px;
       font-size: 0.9rem;
       color: #94a3b8;
     }
-
-    a.button-link {
-      text-decoration: none;
-    }
   </style>
+  <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
 
@@ -100,20 +74,44 @@
 
   <main>
     <p>💰 Assine o Premium ou faça uma compra única e tenha acesso total às funcionalidades da IA!</p>
-    <a href="premium.html" class="button-link">
-      <button>Assine o Premium</button>
-    </a>
+    <button id="checkout-onetime">Compra Única</button>
+    <button id="checkout-subscription">Assinatura Mensal</button>
+  </main>
 
-    <section class="features">
-      <h2>O que você recebe:</h2>
-      <ul>
-        <li>Acesso ilimitado à IA avançada</li>
-        <li>Automação de tarefas inteligentes</li>
-        <li>Suporte exclusivo e atualizações contínuas</li>
-        
-    <script>
-      // Sua chave publicável do Stripe
-      const stripe = Stripe('pk_test_51SQWCUD2yUVCR4xU80UabulobqK1Qt0APEsGymb1J8nEa3ErAcem0qG3z65XnNHaF5BQrzDfuaS0egGfsDv4DDv000w3IWYidd');
+  <footer>
+    © 2025 Grana Money IA. Todos os direitos reservados.
+  </footer>
 
-      document.getElementById('buy-button').addEventListener('click', async () => {
-      
+  <script>
+    // Chave publicável Stripe
+    const stripe = Stripe("pk_test_51SQWCUD2yUVCR4xU80UabulobqK1Qt0APEsGymb1J8nEa3ErAcem0qG3z65XnNHaF5BQrzDfuaS0egGfsDv4DDv000w3IWYidd");
+
+    const PRICE_ONETIME = "price_2wnuRjD2yUVCR4xUGFWEAsZd"; // Produto único
+    const PRICE_SUBSCRIPTION = "price_2wnuUoD2yUVCR4xU1xXXz2vP"; // Assinatura
+
+    const checkout = async (priceId) => {
+      try {
+        const res = await fetch("/api/checkout", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ type: priceId === PRICE_SUBSCRIPTION ? "subscription" : "payment" })
+        });
+
+        const data = await res.json();
+        if (data.payment_url) {
+          window.location.href = data.payment_url; // Redireciona para o checkout
+        } else {
+          alert("Erro ao iniciar pagamento");
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Erro ao processar o pagamento");
+      }
+    };
+
+    document.getElementById("checkout-onetime").addEventListener("click", () => checkout(PRICE_ONETIME));
+    document.getElementById("checkout-subscription").addEventListener("click", () => checkout(PRICE_SUBSCRIPTION));
+  </script>
+
+</body>
+</html>
