@@ -152,38 +152,45 @@
 
       document.getElementById('buy-button').addEventListener('click', async () => {
         try {
-          const response = await fetch('/api/checkout', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' }
-          });
+      <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IA Premium</title>
+  <link rel="stylesheet" href="istyle.css">
+  <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+  <header>
+    <h1>IA Premium</h1>
+    <p>Acesso completo à Inteligência Artificial Avançada</p>
+  </header>
 
-          const data = await response.json();
+  <main>
+    <button id="checkout-onetime">Compra Única</button>
+    <button id="checkout-subscription">Assinatura Mensal</button>
+  </main>
 
-          if (data.error) {
-            document.getElementById('error-message').innerText = data.error;
-            return;
-          }
-
-          // Mostrar botão Link
-          const linkBtn = document.getElementById('link-button');
-          linkBtn.href = data.payment_url;
-          linkBtn.style.display = 'inline-block';
-
-          // Gerar QR Code Pix
-          const pixContainer = document.getElementById('pix-container');
-          pixContainer.innerHTML = '';
-          if (data.payment_url) {
-            new QRCode(pixContainer, {
-              text: data.payment_url,
-              width: 200,
-              height: 200
-            });
-          }
-        } catch (err) {
-          document.getElementById('error-message').innerText = 'Erro ao gerar pagamento.';
-          console.error(err);
+  <script>
+    const checkoutButton = (type) => {
+      fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ type })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.payment_url) {
+          window.location.href = data.payment_url;
+        } else {
+          alert("Erro ao iniciar pagamento");
         }
       });
-    </script>
-  </body>
+    };
+
+    document.getElementById("checkout-onetime").addEventListener("click", () => checkoutButton("payment"));
+    document.getElementById("checkout-subscription").addEventListener("click", () => checkoutButton("subscription"));
+  </script>
+</body>
 </html>
