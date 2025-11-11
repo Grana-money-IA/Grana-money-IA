@@ -1,117 +1,131 @@
 
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Grana Money IA</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(to bottom right, #0f172a, #1e293b);
-      color: #f8fafc;
-      text-align: center;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>💎 IA Premium | Grana Money IA</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <script src="https://js.stripe.com/v3/"></script>
 
-    header {
-      padding: 60px 20px;
-      background-color: rgba(15, 23, 42, 0.85);
-    }
-
-    h1 {
-      font-size: 3rem;
-      margin: 0 0 10px;
-    }
-
-    p.subtitle {
-      font-size: 1.2rem;
-      color: #94a3b8;
-      margin: 0;
-    }
-
-    main {
-      max-width: 700px;
-      margin: 80px auto;
-      padding: 40px;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
-
-    button {
-      background-color: #635bff;
-      color: #fff;
-      padding: 16px 36px;
-      border: none;
-      border-radius: 10px;
-      font-size: 1.3rem;
-      cursor: pointer;
-      transition: background-color 0.3s, transform 0.2s;
-    }
-
-    button:hover {
-      background-color: #4f46e5;
-      transform: scale(1.05);
-    }
-
-    footer {
-      margin-top: 80px;
-      padding: 20px;
-      font-size: 0.9rem;
-      color: #94a3b8;
-    }
-  </style>
-  <script src="https://js.stripe.com/v3/"></script>
-</head>
-<body>
-
-  <header>
-    <h1>Grana Money IA</h1>
-    <p class="subtitle">Sua plataforma de Inteligência Artificial e automação</p>
-  </header>
-
-  <main>
-    <p>💰 Assine o Premium ou faça uma compra única e tenha acesso total às funcionalidades da IA!</p>
-    <button id="checkout-onetime">Compra Única</button>
-    <button id="checkout-subscription">Assinatura Mensal</button>
-  </main>
-
-  <footer>
-    © 2025 Grana Money IA. Todos os direitos reservados.
-  </footer>
-
-  <script>
-    // Chave publicável Stripe
-    const stripe = Stripe("pk_test_51SQWCUD2yUVCR4xU80UabulobqK1Qt0APEsGymb1J8nEa3ErAcem0qG3z65XnNHaF5BQrzDfuaS0egGfsDv4DDv000w3IWYidd");
-
-    const PRICE_ONETIME = "price_2wnuRjD2yUVCR4xUGFWEAsZd"; // Produto único
-    const PRICE_SUBSCRIPTION = "price_2wnuUoD2yUVCR4xU1xXXz2vP"; // Assinatura
-
-    const checkout = async (priceId) => {
-      try {
-        const res = await fetch("/api/checkout", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ type: priceId === PRICE_SUBSCRIPTION ? "subscription" : "payment" })
-        });
-
-        const data = await res.json();
-        if (data.payment_url) {
-          window.location.href = data.payment_url; // Redireciona para o checkout
-        } else {
-          alert("Erro ao iniciar pagamento");
-        }
-      } catch (err) {
-        console.error(err);
-        alert("Erro ao processar o pagamento");
+    <style>
+      /* Estilo geral */
+      body {
+        font-family: "Poppins", Arial, sans-serif;
+        background: linear-gradient(135deg, #0f172a, #1e293b);
+        color: #f8fafc;
+        margin: 0;
+        text-align: center;
       }
-    };
 
-    document.getElementById("checkout-onetime").addEventListener("click", () => checkout(PRICE_ONETIME));
-    document.getElementById("checkout-subscription").addEventListener("click", () => checkout(PRICE_SUBSCRIPTION));
-  </script>
+      header {
+        background-color: rgba(15, 23, 42, 0.9);
+        padding: 60px 20px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      }
 
-</body>
+      h1 {
+        font-size: 2.8rem;
+        margin-bottom: 10px;
+      }
+
+      p.subtitle {
+        font-size: 1.1rem;
+        color: #94a3b8;
+      }
+
+      main {
+        margin: 80px auto;
+        max-width: 700px;
+        padding: 40px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.05);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      main p {
+        font-size: 1.2rem;
+        margin-bottom: 40px;
+        color: #cbd5e1;
+      }
+
+      .btn-container {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+
+      button {
+        background: linear-gradient(90deg, #6366f1, #8b5cf6);
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        padding: 16px 36px;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      button:hover {
+        transform: scale(1.07);
+        background: linear-gradient(90deg, #4f46e5, #7c3aed);
+      }
+
+      footer {
+        margin-top: 80px;
+        padding: 20px;
+        font-size: 0.9rem;
+        color: #94a3b8;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>💎 IA Premium</h1>
+      <p class="subtitle">Soluções inteligentes para negócios e automação</p>
+    </header>
+
+    <main>
+      <p>Ative agora o acesso à <strong>IA Premium</strong> e aproveite todos os recursos exclusivos!</p>
+
+      <div class="btn-container">
+        <button id="checkout-onetime">💼 Compra Única</button>
+        <button id="checkout-subscription">🔄 Assinatura Mensal</button>
+      </div>
+    </main>
+
+    <footer>© 2025 Grana Money IA. Todos os direitos reservados.</footer>
+
+    <script>
+      // Chave pública da sua conta Stripe
+      const stripe = Stripe("pk_test_51SQWCUD2yUVCR4xU80UabulobqK1Qt0APEsGymb1J8nEa3ErAcem0qG3z65XnNHaF5BQrzDfuaS0egGfsDv4DDv000w3IWYidd");
+
+      // Função para abrir checkout do Stripe direto pelo link
+      const checkout = async (type) => {
+        try {
+          // Envia requisição para a rota da API (configure em /api/checkout.js)
+          const response = await fetch("/api/checkout", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ type })
+          });
+
+          const data = await response.json();
+          if (data.url) {
+            window.location.href = data.url; // Redireciona para o Stripe
+          } else {
+            alert("Erro ao iniciar o checkout.");
+          }
+        } catch (error) {
+          console.error("Erro no checkout:", error);
+          alert("Falha ao processar o pagamento.");
+        }
+      };
+
+      document.getElementById("checkout-onetime").addEventListener("click", () => checkout("payment"));
+      document.getElementById("checkout-subscription").addEventListener("click", () => checkout("subscription"));
+    </script>
+  </body>
 </html>
