@@ -1,56 +1,43 @@
+
+// /api/checkout.js
 import Stripe from "stripe";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: "2023-10-16" });
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+  apiVersion: "2023-10-16",
+});
 
 export default async function handler(req, res) {
-  if (req.method !== "POST") return res.status(405).json({ error: "Método não permitido" });
-
-  try {
-    const PRICE_ONETIME = "price_2wnuRjD2yUVCR4xUGFWEAsZd"; 
-    const PRICE_SUBSCRIPTION = "price_2wnuUoD2yUVCR4xU1xXXz2vP";
-
-    const type = req.body?.type || "payment";
-    const priceId = type === "subscription" ? PRICE_SUBSCRIPTION : PRICE_ONETIME;
-
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["pix", "link", "card"],
-      line_items: [{ price: priceId, quantity: 1 }],
-      mode: type === "subscription" ? "subscription" : "payment",
-      success_url: `${req.headers.origin}/premium.html?success=true`,
-      cancel_url: `${req.headers.origin}/premium.html?canceled=true`,
-    });
-
-    return res.status(200).json({ payment_url: session.url });
-  } catch (err) {
-    console.error("Erro ao criar sessão de pagamento:", err);
-    return res.status(500).json({ error: err.message });
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Método não permitido" });
   }
-}
-import Stripe from "stripe";
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: "2023-10-16" });
-
-export default async function handler(req, res) {
-  if (req.method !== "POST") return res.status(405).json({ error: "Método não permitido" });
 
   try {
-    const PRICE_ONETIME = "price_2wnuRjD2yUVCR4xUGFWEAsZd"; 
-    const PRICE_SUBSCRIPTION = "price_2wnuUoD2yUVCR4xU1xXXz2vP";
+    const { type } = req.body;
 
-    const type = req.body?.type || "payment";
-    const priceId = type === "subscription" ? PRICE_SUBSCRIPTION : PRICE_ONETIME;
+    // ✅ ID do produto que você criou no Stripe
+    const PRODUCT_ID = "prod_TNKZ76el7fsMPu";
 
+    // Cria o checkout
     const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["pix", "link", "card"],
-      line_items: [{ price: priceId, quantity: 1 }],
       mode: type === "subscription" ? "subscription" : "payment",
-      success_url: `${req.headers.origin}/premium.html?success=true`,
-      cancel_url: `${req.headers.origin}/premium.html?canceled=true`,
+      line_items: [
+        {
+          price_data: {
+            currency: "brl",
+            product: PRODUCT_ID,
+            unit_amount: type === "subscription" ? undefined : 4990, // Opcional
+            recurring: type === "subscription" ? { interval: "month" } : undefined,
+          },
+          quantity: 1,
+        },
+      ],
+      success_url: "https://grana-money-ia.vercel.app/sucesso",
+      cancel_url: "https://grana-money-ia.vercel.app/",
     });
 
-    return res.status(200).json({ payment_url: session.url });
-  } catch (err) {
-    console.error("Erro ao criar sessão de pagamento:", err);
-    return res.status(500).json({ error: err.message });
+    return res.status(200).json({ url: session.url });
+  } catch (error) {
+    console.error("Erro ao criar checkout:", error);
+    return res.status(500).json({ error: error.message });
   }
 }
