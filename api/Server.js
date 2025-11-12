@@ -28,42 +28,18 @@ app.post('/create-checkout-session', async (req, res) => {
               maximum: { unit: 'business_day', value: 5 }
             }
           }
-        }
-      ]
-    });
+        // Set your secret key. Remember to switch to your live secret key in production.
+// See your keys here: https://dashboard.stripe.com/apikeys
+const stripe = require('stripe')('sk_test_51SQWCUD2yUVCR4xU4gcnopG0PEXzpfHEFG8kjmFRvJs7SLfdCxERtcJI9PNzVWQliCUe8KT4UcDsS1EFbmAeu2ZK00Evdr4G3B');
 
-    res.json({ client_secret: session.client_secret, session_id: session.id });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: error.message });
-  }
+const session = await stripe.checkout.sessions.create({
+  mode: 'payment',
+  line_items: [
+    {
+      price: '{{PRICE_ID}}',
+      quantity: 2,
+    },
+  ],
+  success_url: 'https://example.com/success',
+  payment_method_types: ['bancontact', 'card', 'eps', 'ideal', 'p24', 'sepa_debit'],
 });
-
-// endpoints para atualizar endereço e frete
-app.post('/update-session-shipping', async (req, res) => {
-  try {
-    const { sessionId } = req.body;
-    await stripe.checkout.sessions.update(sessionId, {
-      shipping_address_collection: { allowed_countries: ['BR'] }
-    });
-    res.json({ success: true });
-  } catch (error) {
-    console.error(error);
-    res.json({ error: error.message });
-  }
-});
-
-app.post('/update-session-shipping-rate', async (req, res) => {
-  try {
-    const { sessionId, shippingRateId } = req.body;
-    await stripe.checkout.sessions.update(sessionId, {
-      shipping_options: [{ shipping_rate: shippingRateId }]
-    });
-    res.json({ success: true });
-  } catch (error) {
-    console.error(error);
-    res.json({ error: error.message });
-  }
-});
-
-app.listen(3000, () => console.log('Servidor rodando na porta 3000'));
