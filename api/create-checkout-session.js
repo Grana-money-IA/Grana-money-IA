@@ -1,7 +1,6 @@
-
 import Stripe from "stripe";
 
-const stripe = new Stripe(process. sk_test_51SQWCUD2yUVCR4xU4gcnopG0PEXzpfHEFG8kjmFRvJs7SLfdCxERtcJI9PNzVWQliCUe8KT4UcDsS1EFbmAeu2ZK00Evdr4G3B {
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: "2023-10-16",
 });
 
@@ -13,19 +12,26 @@ export default async function handler(req, res) {
   try {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
+      payment_method_types: ["card", "boleto", "pix"], // 💳 cartão, boleto e PIX
       line_items: [
         {
-          price: "prod_TNKZ76el7fsMPu", // 🔹 seu ID de produto do Stripe
+          price: "price_1SQZuMDnXcpIZEtBrexTYyYC", // 🏷️ seu preço do Stripe
           quantity: 1,
         },
       ],
       success_url: "https://grana-money-ia.vercel.app/sucesso.html",
-      cancel_url: "https://grana-money-ia.vercel.app/",
+      cancel_url: "https://grana-money-ia.vercel.app/erro.html",
+      locale: "pt-BR",
+      payment_method_options: {
+        boleto: {
+          expires_after_days: 3, // boleto válido por 3 dias
+        },
+      },
     });
 
-    res.status(200).json({ payment_url: session.url });
+    res.status(200).json({ url: session.url });
   } catch (error) {
-    console.error("Erro Stripe:", error);
-    res.status(500).json({ error: "Erro ao criar pagamento" });
+    console.error("Erro ao criar sessão:", error);
+    res.status(500).json({ error: error.message });
   }
 }
