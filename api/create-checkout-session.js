@@ -12,20 +12,19 @@ export default async function handler(req, res) {
   try {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
-      payment_method_types: ["card", "boleto", "pix"], // 💳 cartão, boleto e PIX
+      payment_method_types: ["card", "boleto", "pix"], // PIX incluso
       line_items: [
         {
-          price: "price_1SQZuMDnXcpIZEtBrexTYyYC", // 🏷️ seu preço do Stripe
+          price: "price_1SQZuMDnXcpIZEtBrexTYyYC",
           quantity: 1,
         },
       ],
+      currency: "brl", // força BRL
       success_url: "https://grana-money-ia.vercel.app/sucesso.html",
       cancel_url: "https://grana-money-ia.vercel.app/erro.html",
       locale: "pt-BR",
       payment_method_options: {
-        boleto: {
-          expires_after_days: 3, // boleto válido por 3 dias
-        },
+        boleto: { expires_after_days: 3 },
       },
     });
 
