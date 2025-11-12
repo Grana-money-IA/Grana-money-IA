@@ -43,10 +43,3 @@ Permite compras únicas ou assinaturas mensais com **Pix, Link e cartão**, dire
 - Servidor HTTPS (obrigatório para Pix/Link)  
 
 ---
-
-## 🛠️ Instalação
-
-```bash
-git clone https://github.com/Grana-money-IA/Grana-money-IA.git
-cd Grana-money-IA
-npm install stripe
