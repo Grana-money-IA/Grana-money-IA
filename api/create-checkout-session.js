@@ -1,5 +1,4 @@
 
-// /api/checkout.js
 import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
@@ -12,32 +11,21 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { type } = req.body;
-
-    // ✅ ID do produto que você criou no Stripe
-    const PRODUCT_ID = "prod_TNKZ76el7fsMPu";
-
-    // Cria o checkout
     const session = await stripe.checkout.sessions.create({
-      mode: type === "subscription" ? "subscription" : "payment",
+      mode: "payment",
       line_items: [
         {
-          price_data: {
-            currency: "brl",
-            product: PRODUCT_ID,
-            unit_amount: type === "subscription" ? undefined : 4990, // Opcional
-            recurring: type === "subscription" ? { interval: "month" } : undefined,
-          },
+          price: "prod_TNKZ76el7fsMPu", // 🔹 seu ID de produto do Stripe
           quantity: 1,
         },
       ],
-      success_url: "https://grana-money-ia.vercel.app/sucesso",
+      success_url: "https://grana-money-ia.vercel.app/sucesso.html",
       cancel_url: "https://grana-money-ia.vercel.app/",
     });
 
-    return res.status(200).json({ url: session.url });
+    res.status(200).json({ payment_url: session.url });
   } catch (error) {
-    console.error("Erro ao criar checkout:", error);
-    return res.status(500).json({ error: error.message });
+    console.error("Erro Stripe:", error);
+    res.status(500).json({ error: "Erro ao criar pagamento" });
   }
 }
