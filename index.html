@@ -1,87 +1,80 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>💰 Grana Money IA</title>
-  <style>
-    body {
-      font-family: 'Poppins', Arial, sans-serif;
-      background: linear-gradient(135deg, #0f172a, #1e293b);
-      color: #f8fafc;
-      text-align: center;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      padding: 60px 20px;
-    }
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
-    }
-    p {
-      color: #94a3b8;
-      font-size: 1.2rem;
-    }
-    main {
-      margin-top: 60px;
-    }
-    button {
-      background-color: #6366f1;
-      border: none;
-      color: white;
-      padding: 16px 36px;
-      font-size: 1.3rem;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: all 0.3s;
-      margin: 10px;
-    }
-    button:hover {
-      transform: scale(1.05);
-      background-color: #4f46e5;
-    }
-    footer {
-      margin-top: 80px;
-      font-size: 0.9rem;
-      color: #94a3b8;
-    }
-  </style>
-  <script src="https://js.stripe.com/v3/"></script>
-</head>
-<body>
-  <header>
-    <h1>Grana Money IA</h1>
-    <p>Experimente a Inteligência Artificial Premium</p>
-  </header>
-
-  <main>
-    <button id="btn-compra">💳 Comprar Acesso Premium</button>
-  </main>
-
-  <footer>© 2025 Grana Money IA — Todos os direitos reservados.</footer>
-
-  <script>
-    const checkout = async () => {
-      try {
-        const res = await fetch("/api/checkout", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-        });
-        const data = await res.json();
-        if (data.payment_url) {
-          window.location.href = data.payment_url;
-        } else {
-          alert("Erro ao iniciar pagamento");
-        }
-      } catch (err) {
-        alert("Erro no servidor");
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IA Premium</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to bottom right, #0f172a, #1e293b);
+        color: #f8fafc;
+        text-align: center;
+        margin: 0;
+        padding: 0;
       }
-    };
 
-    document.getElementById("btn-compra").addEventListener("click", checkout);
-  </script>
-</body>
+      header {
+        padding: 30px 0;
+        background-color: rgba(15, 23, 42, 0.8);
+      }
+
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      section {
+        margin: 60px auto;
+        max-width: 600px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        padding: 40px;
+      }
+
+      button {
+        background-color: #635bff;
+        color: white;
+        padding: 14px 32px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1.2rem;
+      }
+
+      button:hover {
+        background-color: #4f46e5;
+      }
+
+      footer {
+        margin-top: 60px;
+        padding: 20px;
+        font-size: 0.9rem;
+        color: #94a3b8;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>💎 IA Premium</h1>
+      <p>Libere o acesso à inteligência artificial avançada após o pagamento</p>
+    </header>
+
+    <section>
+      <h2>Plano Premium</h2>
+      <p>Acesso completo à IA que ajuda em gestão, negócios e automação.</p>
+
+      <a
+        href="https://buy.stripe.com/8x27sLaHK3rq0Ml2390co00"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <button>💳 Comprar Agora – R$49,90</button>
+      </a>
+    </section>
+
+    <footer>
+      <p>© 2025 IA Premium — Todos os direitos reservados.</p>
+    </footer>
+  </body>
 </html>
