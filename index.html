@@ -1,268 +1,279 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>💎 IA Premium Ultra 2026</title>
+    <title>💎 IA Premium Ultra</title>
+
     <style>
-      /* ---------- ESTILO BASE ---------- */
-      body {
+      * {
         margin: 0;
-        font-family: "Poppins", sans-serif;
-        background: radial-gradient(circle at top, #0f172a, #1e293b);
-        color: #f8fafc;
-        overflow-x: hidden;
-        position: relative;
-        min-height: 100vh;
+        padding: 0;
+        box-sizing: border-box;
       }
 
-      header {
+      body {
+        font-family: "Poppins", sans-serif;
+        background: radial-gradient(circle at top left, #0f172a, #1e293b, #020617);
+        color: #f8fafc;
         text-align: center;
-        padding: 60px 20px 20px;
+        overflow-x: hidden;
+        min-height: 100vh;
         position: relative;
-        z-index: 2;
+      }
+
+      /* === ORBS FLUTUANTES === */
+      .orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(100px);
+        opacity: 0.5;
+        animation: float 8s ease-in-out infinite;
+        z-index: 0;
+      }
+      .orb1 {
+        width: 320px;
+        height: 320px;
+        background: #7c3aed;
+        top: 10%;
+        left: 10%;
+      }
+      .orb2 {
+        width: 400px;
+        height: 400px;
+        background: #3b82f6;
+        bottom: 5%;
+        right: 8%;
+        animation-delay: 2s;
+      }
+      @keyframes float {
+        0%, 100% { transform: translateY(0) scale(1); }
+        50% { transform: translateY(-40px) scale(1.05); }
+      }
+
+      /* === HEADER === */
+      header {
+        padding: 80px 20px 30px;
+        position: relative;
+        z-index: 1;
+        animation: fadeDown 1.2s ease forwards;
+      }
+      @keyframes fadeDown {
+        from { opacity: 0; transform: translateY(-40px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      .diamond {
+        font-size: 4.5rem;
+        display: inline-block;
+        animation: spin 8s linear infinite, glow 2s ease-in-out infinite alternate;
+        background: linear-gradient(45deg, #60a5fa, #a78bfa, #c084fc);
+        -webkit-background-clip: text;
+        color: transparent;
+        text-shadow: 0 0 40px rgba(168, 85, 247, 0.8);
+      }
+      @keyframes spin {
+        from { transform: rotateY(0deg); }
+        to { transform: rotateY(360deg); }
+      }
+      @keyframes glow {
+        from { filter: drop-shadow(0 0 10px #7c3aed); }
+        to { filter: drop-shadow(0 0 30px #c084fc); }
       }
 
       h1 {
-        font-size: 3rem;
-        background: linear-gradient(90deg, #38bdf8, #818cf8, #a78bfa);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin: 0;
+        font-size: 2.6rem;
         font-weight: 700;
-        letter-spacing: 1px;
+        margin-top: 15px;
+        background: linear-gradient(90deg, #60a5fa, #a78bfa, #c084fc);
+        -webkit-background-clip: text;
+        color: transparent;
       }
 
-      p.subtitle {
-        color: #cbd5e1;
+      header p {
         font-size: 1.1rem;
+        color: #cbd5e1;
         margin-top: 10px;
       }
 
-      /* ---------- DIAMANTE ---------- */
-      .diamond {
-        width: 130px;
-        height: 130px;
-        margin: 40px auto;
-        background: linear-gradient(145deg, #60a5fa, #818cf8, #a78bfa);
-        clip-path: polygon(50% 0%, 90% 35%, 70% 100%, 30% 100%, 10% 35%);
-        animation: float 4s ease-in-out infinite, glow 3s ease-in-out infinite alternate;
-        box-shadow: 0 0 40px rgba(129, 140, 248, 0.8);
-        transform: perspective(800px) rotateX(10deg);
-      }
-
-      @keyframes float {
-        0%, 100% { transform: translateY(0) perspective(800px) rotateX(10deg); }
-        50% { transform: translateY(-15px) perspective(800px) rotateX(10deg); }
-      }
-
-      @keyframes glow {
-        0% { box-shadow: 0 0 20px #818cf8; }
-        100% { box-shadow: 0 0 50px #a78bfa; }
-      }
-
-      /* ---------- SEÇÃO PRINCIPAL ---------- */
+      /* === PLANO === */
       section {
-        max-width: 700px;
-        margin: 60px auto;
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 16px;
-        padding: 50px 30px;
-        box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
-        text-align: center;
-        backdrop-filter: blur(10px);
-        z-index: 2;
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(25px);
+        border-radius: 20px;
+        margin: 50px auto;
+        max-width: 720px;
+        padding: 60px 40px;
+        box-shadow: 0 0 40px rgba(99, 102, 241, 0.3);
         position: relative;
-        opacity: 0;
-        transform: translateY(40px);
-        transition: all 1s ease;
+        z-index: 1;
+        animation: fadeUp 1.2s ease forwards;
+      }
+      @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(40px); }
+        to { opacity: 1; transform: translateY(0); }
       }
 
-      section.visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      section h2 {
+      h2 {
         font-size: 2rem;
-        color: #e0e7ff;
+        color: #c7d2fe;
         margin-bottom: 15px;
       }
 
       section p {
-        color: #cbd5e1;
-        margin-bottom: 30px;
+        color: #e2e8f0;
         font-size: 1.1rem;
+        margin-bottom: 35px;
       }
 
-      button {
-        background: linear-gradient(90deg, #6366f1, #4f46e5);
+      .btn-premium {
+        display: inline-block;
+        padding: 16px 48px;
+        font-size: 1.3rem;
+        font-weight: 600;
         color: white;
-        padding: 14px 40px;
+        background: linear-gradient(90deg, #7c3aed, #6366f1, #3b82f6);
         border: none;
-        border-radius: 10px;
-        cursor: pointer;
-        font-size: 1.2rem;
-        transition: transform 0.2s ease, box-shadow 0.3s ease;
+        border-radius: 50px;
+        box-shadow: 0 0 30px rgba(99, 102, 241, 0.5);
+        text-decoration: none;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s ease;
       }
 
-      button:hover {
-        transform: scale(1.05);
-        box-shadow: 0 0 25px #818cf8;
+      .btn-premium::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -75%;
+        width: 50%;
+        height: 100%;
+        background: linear-gradient(
+          120deg,
+          transparent,
+          rgba(255, 255, 255, 0.5),
+          transparent
+        );
+        transform: skewX(-25deg);
       }
 
-      /* ---------- CHAT SIMULADO ---------- */
+      .btn-premium:hover::before {
+        left: 125%;
+        transition: 0.9s;
+      }
+
+      .btn-premium:hover {
+        transform: scale(1.08);
+        box-shadow: 0 0 60px rgba(168, 85, 247, 0.8);
+      }
+
+      /* === CHAT DEPOIMENTOS === */
       .chat-section {
-        max-width: 800px;
-        margin: 80px auto;
-        padding: 40px;
-        border-radius: 16px;
+        max-width: 750px;
+        margin: 80px auto 40px;
         background: rgba(255, 255, 255, 0.04);
-        backdrop-filter: blur(8px);
-        box-shadow: 0 0 30px rgba(99, 102, 241, 0.2);
-        opacity: 0;
-        transform: translateY(40px);
-        transition: all 1s ease;
+        border-radius: 16px;
+        padding: 40px 25px;
+        box-shadow: 0 0 20px rgba(56, 189, 248, 0.15);
+        position: relative;
+        z-index: 1;
       }
 
-      .chat-section.visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      .chat-title {
-        text-align: center;
-        font-size: 1.8rem;
-        margin-bottom: 30px;
-        color: #c7d2fe;
-      }
-
-      .message {
-        display: flex;
-        align-items: flex-start;
+      .chat-bubble {
+        text-align: left;
         margin: 15px 0;
-        gap: 12px;
-      }
-
-      .user,
-      .bot {
-        padding: 14px 20px;
+        padding: 15px 20px;
         border-radius: 14px;
         max-width: 80%;
         line-height: 1.5;
-        animation: fadeIn 0.6s ease both;
+        font-size: 1rem;
+        animation: fadeInChat 0.8s ease both;
       }
 
       .user {
-        background: linear-gradient(90deg, #38bdf8, #2563eb);
-        color: white;
-        align-self: flex-end;
+        background: rgba(59, 130, 246, 0.2);
         margin-left: auto;
+        color: #bfdbfe;
+        border: 1px solid rgba(59, 130, 246, 0.4);
       }
 
-      .bot {
-        background: rgba(255, 255, 255, 0.1);
-        color: #e2e8f0;
-        border: 1px solid rgba(255, 255, 255, 0.08);
+      .ai {
+        background: rgba(147, 51, 234, 0.15);
+        color: #e9d5ff;
+        border: 1px solid rgba(147, 51, 234, 0.3);
+        margin-right: auto;
       }
 
-      @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(10px); }
+      @keyframes fadeInChat {
+        from { opacity: 0; transform: translateY(20px); }
         to { opacity: 1; transform: translateY(0); }
       }
 
-      /* ---------- PARTÍCULAS DE FUNDO ---------- */
-      .particle {
-        position: absolute;
-        width: 6px;
-        height: 6px;
-        background: rgba(129, 140, 248, 0.4);
-        border-radius: 50%;
-        animation: floatUp linear infinite;
-        z-index: 0;
-      }
-
-      @keyframes floatUp {
-        0% {
-          transform: translateY(100vh) scale(0.6);
-          opacity: 0;
-        }
-        50% {
-          opacity: 1;
-        }
-        100% {
-          transform: translateY(-10vh) scale(1);
-          opacity: 0;
-        }
-      }
-
-      /* ---------- RODAPÉ ---------- */
+      /* === FOOTER === */
       footer {
-        margin-top: 100px;
         text-align: center;
+        font-size: 0.95rem;
         color: #94a3b8;
-        font-size: 0.9rem;
-        padding: 40px 0;
+        padding: 40px 0 60px;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
       }
 
       footer span {
         color: #818cf8;
+        font-weight: 600;
+      }
+
+      @media (max-width: 600px) {
+        h1 { font-size: 2rem; }
+        .btn-premium { font-size: 1.1rem; padding: 14px 35px; }
+        section { padding: 40px 20px; }
       }
     </style>
   </head>
 
   <body>
+    <!-- Efeitos de fundo -->
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+
+    <!-- Cabeçalho -->
     <header>
-      <h1>💎 IA Premium Ultra 2026</h1>
-      <p class="subtitle">O poder da Grana Money IA — futurismo, inovação e automação real.</p>
-      <div class="diamond"></div>
+      <div class="diamond">💎</div>
+      <h1>IA Premium Ultra</h1>
+      <p>Desbloqueie o poder máximo da inteligência artificial com acesso exclusivo.</p>
     </header>
 
+    <!-- Plano -->
     <section>
       <h2>Plano Premium</h2>
-      <p>Acesso total à <strong>Grana Money IA</strong> — automação, gestão e respostas inteligentes.</p>
-      <a href="https://buy.stripe.com/8x27sLaHK3rq0Ml2390co00" target="_blank" rel="noopener noreferrer">
-        <button>💠 Liberar Acesso — R$5,00</button>
+      <p>Acesso completo à IA para gestão, automação e inteligência de negócios.</p>
+      <a
+        href="https://buy.stripe.com/8x27sLaHK3rq0Ml2390co00"
+        class="btn-premium"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        💰 Acessar por R$5,00
       </a>
     </section>
 
+    <!-- Depoimentos estilo chat -->
     <div class="chat-section">
-      <h3 class="chat-title">💬 Conversas com a Grana Money IA</h3>
+      <div class="chat-bubble user">💬 Eu investi só R$5 e a IA me deu ideias incríveis de marketing!</div>
+      <div class="chat-bubble ai">🤖 Grana Money IA: Que ótimo! Suas estratégias agora estão otimizadas automaticamente!</div>
 
-      <div class="message user">💬 Como posso aumentar minhas vendas em 2026?</div>
-      <div class="message bot">🚀 Use IA para personalizar ofertas automáticas e entender o comportamento do cliente em tempo real.</div>
+      <div class="chat-bubble user">💬 Essa IA realmente entende meu negócio, vale cada centavo!</div>
+      <div class="chat-bubble ai">🤖 Grana Money IA: Nossa missão é multiplicar resultados com inteligência real.</div>
 
-      <div class="message user">💬 Ela ajuda na gestão financeira também?</div>
-      <div class="message bot">💎 Sim, a Grana Money IA analisa lucros, gastos e cria relatórios automáticos diários.</div>
-
-      <div class="message user">💬 E se eu quiser automatizar mensagens?</div>
-      <div class="message bot">🤖 Você pode integrar com WhatsApp e Stripe para automações completas de pagamento e atendimento.</div>
+      <div class="chat-bubble user">💬 Consegui dobrar minhas vendas em 10 dias, surreal!</div>
+      <div class="chat-bubble ai">🤖 Grana Money IA: Isso é só o começo, novas metas estão sendo criadas pra você.</div>
     </div>
 
+    <!-- Rodapé -->
     <footer>
-      <p>© <span>2026</span> IA Premium Ultra — Todos os direitos reservados.</p>
+      <p>© 2025 <span>IA Premium Ultra</span> — Todos os direitos reservados.</p>
     </footer>
-
-    <script>
-      // EFEITO DE PARTÍCULAS
-      const body = document.body;
-      for (let i = 0; i < 25; i++) {
-        const particle = document.createElement("div");
-        particle.classList.add("particle");
-        particle.style.left = Math.random() * 100 + "vw";
-        particle.style.animationDuration = 6 + Math.random() * 6 + "s";
-        particle.style.animationDelay = Math.random() * 6 + "s";
-        body.appendChild(particle);
-      }
-
-      // ANIMAÇÃO DE SCROLL REVEAL
-      const revealElements = document.querySelectorAll("section, .chat-section");
-      window.addEventListener("scroll", () => {
-        revealElements.forEach((el) => {
-          const rect = el.getBoundingClientRect();
-          if (rect.top < window.innerHeight - 100) el.classList.add("visible");
-        });
-      });
-    </script>
   </body>
 </html>
