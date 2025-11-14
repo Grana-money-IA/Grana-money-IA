@@ -1,278 +1,205 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>💎 IA Premium Ultra</title>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grana Money IA • Premium 2026</title>
 
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+  <style>
+    /* Fundo Matrix Azul 2026 */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", sans-serif;
+      background: radial-gradient(circle at top, #002b50, #000a14);
+      color: white;
+      overflow-x: hidden;
+    }
 
-      body {
-        font-family: "Poppins", sans-serif;
-        background: radial-gradient(circle at top left, #0f172a, #1e293b, #020617);
-        color: #f8fafc;
-        text-align: center;
-        overflow-x: hidden;
-        min-height: 100vh;
-        position: relative;
-      }
+    /* Efeito matrix */
+    .matrix-bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      opacity: 0.22;
+      z-index: 0;
+    }
 
-      /* === ORBS FLUTUANTES === */
-      .orb {
-        position: absolute;
-        border-radius: 50%;
-        filter: blur(100px);
-        opacity: 0.5;
-        animation: float 8s ease-in-out infinite;
-        z-index: 0;
-      }
-      .orb1 {
-        width: 320px;
-        height: 320px;
-        background: #7c3aed;
-        top: 10%;
-        left: 10%;
-      }
-      .orb2 {
-        width: 400px;
-        height: 400px;
-        background: #3b82f6;
-        bottom: 5%;
-        right: 8%;
-        animation-delay: 2s;
-      }
-      @keyframes float {
-        0%, 100% { transform: translateY(0) scale(1); }
-        50% { transform: translateY(-40px) scale(1.05); }
-      }
+    /* Container principal */
+    .content {
+      text-align: center;
+      padding: 50px 20px;
+      position: relative;
+      z-index: 2;
+    }
 
-      /* === HEADER === */
-      header {
-        padding: 80px 20px 30px;
-        position: relative;
-        z-index: 1;
-        animation: fadeDown 1.2s ease forwards;
-      }
-      @keyframes fadeDown {
-        from { opacity: 0; transform: translateY(-40px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
+    /* Título futurista */
+    h1 {
+      font-size: 3.2em;
+      text-shadow: 0 0 12px #00c3ff;
+      margin-bottom: 10px;
+    }
 
-      .diamond {
-        font-size: 4.5rem;
-        display: inline-block;
-        animation: spin 8s linear infinite, glow 2s ease-in-out infinite alternate;
-        background: linear-gradient(45deg, #60a5fa, #a78bfa, #c084fc);
-        -webkit-background-clip: text;
-        color: transparent;
-        text-shadow: 0 0 40px rgba(168, 85, 247, 0.8);
-      }
-      @keyframes spin {
-        from { transform: rotateY(0deg); }
-        to { transform: rotateY(360deg); }
-      }
-      @keyframes glow {
-        from { filter: drop-shadow(0 0 10px #7c3aed); }
-        to { filter: drop-shadow(0 0 30px #c084fc); }
-      }
+    /* Subtítulo */
+    h2 {
+      font-weight: 300;
+      font-size: 1.4em;
+      opacity: 0.8;
+      margin-top: -10px;
+    }
 
-      h1 {
-        font-size: 2.6rem;
-        font-weight: 700;
-        margin-top: 15px;
-        background: linear-gradient(90deg, #60a5fa, #a78bfa, #c084fc);
-        -webkit-background-clip: text;
-        color: transparent;
-      }
+    /* Diamante holográfico atualizado */
+    .diamond {
+      margin: 50px auto;
+      width: 180px;
+      height: 180px;
+      background: linear-gradient(135deg, #00eaff, #0077ff, #a4c8ff);
+      clip-path: polygon(
+        50% 0%, 
+        90% 25%, 
+        100% 65%, 
+        50% 100%, 
+        0% 65%, 
+        10% 25%
+      );
+      animation: glow 4s infinite alternate ease-in-out;
+      filter: drop-shadow(0 0 18px #00c3ff);
+    }
 
-      header p {
-        font-size: 1.1rem;
-        color: #cbd5e1;
-        margin-top: 10px;
-      }
+    @keyframes glow {
+      0% { transform: scale(1) rotate(0deg); }
+      100% { transform: scale(1.08) rotate(7deg); }
+    }
 
-      /* === PLANO === */
-      section {
-        background: rgba(255, 255, 255, 0.08);
-        backdrop-filter: blur(25px);
-        border-radius: 20px;
-        margin: 50px auto;
-        max-width: 720px;
-        padding: 60px 40px;
-        box-shadow: 0 0 40px rgba(99, 102, 241, 0.3);
-        position: relative;
-        z-index: 1;
-        animation: fadeUp 1.2s ease forwards;
-      }
-      @keyframes fadeUp {
-        from { opacity: 0; transform: translateY(40px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
+    /* Botão Mercado Pago */
+    .btn {
+      background: linear-gradient(90deg, #00a8ff, #0066ff);
+      padding: 16px 28px;
+      border-radius: 12px;
+      font-size: 1.3em;
+      color: white;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 20px;
+      box-shadow: 0 0 12px #008cff;
+      transition: 0.3s;
+    }
 
-      h2 {
-        font-size: 2rem;
-        color: #c7d2fe;
-        margin-bottom: 15px;
-      }
+    .btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 20px #00c3ff;
+    }
 
-      section p {
-        color: #e2e8f0;
-        font-size: 1.1rem;
-        margin-bottom: 35px;
-      }
+    /* Caixa de Chat IA */
+    .chat-box {
+      background: rgba(0, 34, 58, 0.55);
+      border: 1px solid #00c3ff42;
+      border-radius: 14px;
+      padding: 22px;
+      max-width: 600px;
+      margin: 40px auto;
+      box-shadow: 0 0 12px #003a55;
+    }
 
-      .btn-premium {
-        display: inline-block;
-        padding: 16px 48px;
-        font-size: 1.3rem;
-        font-weight: 600;
-        color: white;
-        background: linear-gradient(90deg, #7c3aed, #6366f1, #3b82f6);
-        border: none;
-        border-radius: 50px;
-        box-shadow: 0 0 30px rgba(99, 102, 241, 0.5);
-        text-decoration: none;
-        position: relative;
-        overflow: hidden;
-        transition: all 0.4s ease;
-      }
+    .msg {
+      padding: 12px 16px;
+      background: #002e47;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      border-left: 4px solid #00c3ff;
+    }
 
-      .btn-premium::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -75%;
-        width: 50%;
-        height: 100%;
-        background: linear-gradient(
-          120deg,
-          transparent,
-          rgba(255, 255, 255, 0.5),
-          transparent
-        );
-        transform: skewX(-25deg);
-      }
+    .ai {
+      background: #004f7c;
+      border-left: 4px solid #66d9ff;
+    }
 
-      .btn-premium:hover::before {
-        left: 125%;
-        transition: 0.9s;
-      }
+    /* Prova social */
+    .social-proof {
+      margin-top: 40px;
+      font-size: 0.9em;
+      opacity: 0.75;
+      animation: pulse 3s infinite;
+    }
 
-      .btn-premium:hover {
-        transform: scale(1.08);
-        box-shadow: 0 0 60px rgba(168, 85, 247, 0.8);
-      }
+    @keyframes pulse {
+      0% { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
+  </style>
+</head>
 
-      /* === CHAT DEPOIMENTOS === */
-      .chat-section {
-        max-width: 750px;
-        margin: 80px auto 40px;
-        background: rgba(255, 255, 255, 0.04);
-        border-radius: 16px;
-        padding: 40px 25px;
-        box-shadow: 0 0 20px rgba(56, 189, 248, 0.15);
-        position: relative;
-        z-index: 1;
-      }
+<body>
 
-      .chat-bubble {
-        text-align: left;
-        margin: 15px 0;
-        padding: 15px 20px;
-        border-radius: 14px;
-        max-width: 80%;
-        line-height: 1.5;
-        font-size: 1rem;
-        animation: fadeInChat 0.8s ease both;
-      }
+  <!-- Efeito matrix -->
+  <canvas class="matrix-bg" id="matrix"></canvas>
 
-      .user {
-        background: rgba(59, 130, 246, 0.2);
-        margin-left: auto;
-        color: #bfdbfe;
-        border: 1px solid rgba(59, 130, 246, 0.4);
-      }
+  <!-- Conteúdo principal -->
+  <div class="content">
+    <h1>Grana Money IA</h1>
+    <h2>A Inteligência Artificial que trabalha por você — 2026</h2>
 
-      .ai {
-        background: rgba(147, 51, 234, 0.15);
-        color: #e9d5ff;
-        border: 1px solid rgba(147, 51, 234, 0.3);
-        margin-right: auto;
-      }
+    <div class="diamond"></div>
 
-      @keyframes fadeInChat {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
+    <a class="btn" href="https://mpago.la/1SVYfcq" target="_blank">
+      💳 Acessar Grana Money IA Premium
+    </a>
 
-      /* === FOOTER === */
-      footer {
-        text-align: center;
-        font-size: 0.95rem;
-        color: #94a3b8;
-        padding: 40px 0 60px;
-        border-top: 1px solid rgba(255, 255, 255, 0.08);
-      }
+    <!-- Chat IA Simulado -->
+    <div class="chat-box">
+      <div class="msg"><strong>Usuário:</strong> Como a Grana Money IA pode me ajudar?</div>
+      <div class="msg ai"><strong>Grana Money IA:</strong> Automatizo tarefas, gero conteúdo, crio estratégias e organizo seu negócio 24h por dia.</div>
 
-      footer span {
-        color: #818cf8;
-        font-weight: 600;
-      }
+      <div class="msg"><strong>Usuário:</strong> Preciso ter experiência para usar?</div>
+      <div class="msg ai"><strong>Grana Money IA:</strong> Não! Tudo é guiado, simples e rápido. Qualquer pessoa pode aproveitar.</div>
 
-      @media (max-width: 600px) {
-        h1 { font-size: 2rem; }
-        .btn-premium { font-size: 1.1rem; padding: 14px 35px; }
-        section { padding: 40px 20px; }
-      }
-    </style>
-  </head>
-
-  <body>
-    <!-- Efeitos de fundo -->
-    <div class="orb orb1"></div>
-    <div class="orb orb2"></div>
-
-    <!-- Cabeçalho -->
-    <header>
-      <div class="diamond">💎</div>
-      <h1>IA Premium Ultra</h1>
-      <p>Desbloqueie o poder máximo da inteligência artificial com acesso exclusivo.</p>
-    </header>
-
-    <!-- Plano -->
-    <section>
-      <h2>Plano Premium</h2>
-      <p>Acesso completo à IA para gestão, automação e inteligência de negócios.</p>
-      <a
-        href="https://mpago.la/1SVYfcq"
-        class="btn-premium"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        💰 Acessar por R$5,00
-      </a>
-    </section>
-
-    <!-- Depoimentos estilo chat -->
-    <div class="chat-section">
-      <div class="chat-bubble user">💬 Eu investi só R$5 e a IA me deu ideias incríveis de marketing!</div>
-      <div class="chat-bubble ai">🤖 Grana Money IA: Que ótimo! Suas estratégias agora estão otimizadas automaticamente!</div>
-
-      <div class="chat-bubble user">💬 Essa IA realmente entende meu negócio, vale cada centavo!</div>
-      <div class="chat-bubble ai">🤖 Grana Money IA: Nossa missão é multiplicar resultados com inteligência real.</div>
-
-      <div class="chat-bubble user">💬 Consegui dobrar minhas vendas em 10 dias, surreal!</div>
-      <div class="chat-bubble ai">🤖 Grana Money IA: Isso é só o começo, novas metas estão sendo criadas pra você.</div>
+      <div class="msg"><strong>Usuário:</strong> Posso usar no celular?</div>
+      <div class="msg ai"><strong>Grana Money IA:</strong> Sim! 100% compatível com Android, iPhone e computador.</div>
     </div>
 
-    <!-- Rodapé -->
-    <footer>
-      <p>© 2025 <span>IA Premium Ultra</span> — Todos os direitos reservados.</p>
-    </footer>
-  </body>
+    <div class="social-proof">
+      🔥 147 pessoas ativaram o Grana Money IA nas últimas 24 horas.
+    </div>
+
+  </div>
+
+
+  <!-- Script Matrix -->
+  <script>
+    const canvas = document.getElementById("matrix");
+    const ctx = canvas.getContext("2d");
+
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+
+    const chars = "10110110011010011100011101010101001101101";
+    const fontSize = 16;
+    const columns = canvas.width / fontSize;
+
+    const drops = [];
+    for (let i = 0; i < columns; i++) drops[i] = 1;
+
+    function drawMatrix() {
+      ctx.fillStyle = "rgba(0, 10, 20, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.fillStyle = "#00c3ff";
+      ctx.font = fontSize + "px monospace";
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = chars[Math.floor(Math.random() * chars.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.96)
+          drops[i] = 0;
+
+        drops[i]++;
+      }
+    }
+
+    setInterval(drawMatrix, 35);
+  </script>
+
+</body>
 </html>
