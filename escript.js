@@ -1,4 +1,18 @@
+// CONTROLE DE ACESSO
+const TEMPO_GRATIS = 3 * 60 * 60 * 1000; // 3 horas
 
+let inicio = localStorage.getItem("inicio");
+
+if (!inicio) {
+  localStorage.setItem("inicio", Date.now());
+} else {
+  let tempoUsado = Date.now() - inicio;
+
+  if (tempoUsado > TEMPO_GRATIS && !localStorage.getItem("vip")) {
+    alert("Seu tempo grátis acabou! Compre o VIP.");
+    window.location.href = "premium.html";
+  }
+}
 document.getElementById("checkout-one-time").addEventListener("click", async () => {
   try {
     const res = await fetch("/api/create-checkout-session", {
