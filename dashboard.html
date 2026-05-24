@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Grana Money IA Premium</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial, sans-serif;
+    }
+
+    body{
+      background:#0f0f0f;
+      color:white;
+      min-height:100vh;
+    }
+
+    header{
+      background:#151515;
+      padding:20px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      border-bottom:1px solid #222;
+    }
+
+    .logo{
+      font-size:24px;
+      font-weight:bold;
+      color:#00ff88;
+    }
+
+    .premium{
+      background:#00ff88;
+      color:black;
+      padding:8px 15px;
+      border-radius:20px;
+      font-weight:bold;
+    }
+
+    .container{
+      padding:20px;
+      max-width:1000px;
+      margin:auto;
+    }
+
+    .welcome{
+      background:#151515;
+      padding:25px;
+      border-radius:15px;
+      margin-bottom:20px;
+      border:1px solid #222;
+    }
+
+    .welcome h1{
+      margin-bottom:10px;
+      color:#00ff88;
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:15px;
+      margin-bottom:25px;
+    }
+
+    .card{
+      background:#151515;
+      padding:20px;
+      border-radius:15px;
+      border:1px solid #222;
+    }
+
+    .card h2{
+      color:#00ff88;
+      margin-bottom:10px;
+      font-size:18px;
+    }
+
+    .chat-box{
+      background:#151515;
+      padding:20px;
+      border-radius:15px;
+      border:1px solid #222;
+    }
+
+    .chat-box h2{
+      margin-bottom:15px;
+      color:#00ff88;
+    }
+
+    textarea{
+      width:100%;
+      height:120px;
+      background:#0f0f0f;
+      border:1px solid #333;
+      border-radius:10px;
+      color:white;
+      padding:15px;
+      resize:none;
+      margin-bottom:15px;
+    }
+
+    button{
+      background:#00ff88;
+      color:black;
+      border:none;
+      padding:12px 25px;
+      border-radius:10px;
+      font-weight:bold;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    button:hover{
+      opacity:0.8;
+    }
+
+    .response{
+      margin-top:20px;
+      background:#0f0f0f;
+      padding:15px;
+      border-radius:10px;
+      border:1px solid #333;
+      min-height:80px;
+    }
+
+    footer{
+      text-align:center;
+      padding:20px;
+      color:#777;
+      margin-top:30px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">💰 Grana Money IA</div>
+    <div class="premium">PREMIUM ATIVO</div>
+  </header>
+
+  <div class="container">
+
+    <div class="welcome">
+      <h1>🔥 Bem-vindo ao Premium</h1>
+      <p>Seu pagamento foi aprovado com sucesso.</p>
+      <p>Agora você possui acesso ao sistema premium do Grana Money IA.</p>
+    </div>
+
+    <div class="cards">
+
+      <div class="card">
+        <h2>👤 Usuário</h2>
+        <p id="userName">Alisson</p>
+      </div>
+
+      <div class="card">
+        <h2>💎 Plano</h2>
+        <p>Premium</p>
+      </div>
+
+      <div class="card">
+        <h2>⚡ Créditos</h2>
+        <p>999</p>
+      </div>
+
+      <div class="card">
+        <h2>🤖 IA Status</h2>
+        <p>Online</p>
+      </div>
+
+    </div>
+
+    <div class="chat-box">
+      <h2>🤖 Chat IA Premium</h2>
+
+      <textarea 
+        id="message"
+        placeholder="Digite sua pergunta para a IA...">
+      </textarea>
+
+      <button onclick="sendMessage()">
+        Enviar Pergunta
+      </button>
+
+      <div class="response" id="response">
+        A resposta da IA aparecerá aqui...
+      </div>
+
+    </div>
+
+  </div>
+
+  <footer>
+    © 2026 Grana Money IA - Todos os direitos reservados
+  </footer>
+
+  <script>
+
+    function sendMessage(){
+
+      let message = document.getElementById("message").value;
+
+      if(message.trim() === ""){
+        alert("Digite uma pergunta");
+        return;
+      }
+
+      document.getElementById("response").innerHTML =
+      "🤖 IA processando sua pergunta:<br><br>" + message;
+
+    }
+
+  </script>
+
+</body>
+</html>
